@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox prefHeight="1000.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GroundController">
+
+   <HBox prefHeight="300" prefWidth="300">
+      <VBox fx:id="vba1" prefHeight="300" prefWidth="30" />
+      <VBox fx:id="vba2" prefHeight="300" prefWidth="30" />
+      <VBox fx:id="vba3" prefHeight="300" prefWidth="30" />
+      <VBox fx:id="vba4" prefHeight="300" prefWidth="30" />
+      <VBox fx:id="vba5" prefHeight="300" prefWidth="30" />
+      <VBox fx:id="vba6" prefHeight="300" prefWidth="30" />
+      <VBox fx:id="vba7" prefHeight="300" prefWidth="30" />
+      <VBox fx:id="vba8" prefHeight="300" prefWidth="30" />
+      <VBox fx:id="vba9" prefHeight="300" prefWidth="30" />
+      <VBox fx:id="vba10" prefHeight="300" prefWidth="30" />
+   </HBox>
+
+
+   <HBox prefHeight="50" prefWidth="50">
+
+   </HBox>
+
+   <HBox prefHeight="300" prefWidth="300">
+      <VBox fx:id="vbb1" prefHeight="300" prefWidth="30" />
+      <VBox fx:id="vbb2" prefHeight="300" prefWidth="30" />
+      <VBox fx:id="vbb3" prefHeight="300" prefWidth="30" />
+      <VBox fx:id="vbb4" prefHeight="300" prefWidth="30" />
+      <VBox fx:id="vbb5" prefHeight="300" prefWidth="30" />
+      <VBox fx:id="vbb6" prefHeight="300" prefWidth="30" />
+      <VBox fx:id="vbb7" prefHeight="300" prefWidth="30" />
+      <VBox fx:id="vbb8" prefHeight="300" prefWidth="30" />
+      <VBox fx:id="vbb9" prefHeight="300" prefWidth="30" />
+      <VBox fx:id="vbb10" prefHeight="300" prefWidth="30" />
+   </HBox>
+
+</HBox>
