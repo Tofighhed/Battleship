@@ -5,12 +5,13 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Ground {
+public  class Ground {
 public Ground(int gm){
     game_id=gm;
 }
+public Ground(){}
     public int game_id;
-    public int[][] Board_array=new int[10][10];
+    public int[][]  Board_array=new int[10][10];
 
 
     public void make_ground(){

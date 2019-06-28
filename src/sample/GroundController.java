@@ -10,6 +10,7 @@ import model.Analysis;
 import model.Ground;
 import model.Pos;
 
+import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -301,6 +302,11 @@ public class GroundController implements Initializable {
             }
         }
     }
+//    @FXML
+//    Button make_ground=new Button();
+//    public void setMake_ground(ActiveEvent activeEvent){
+//
+//    }
 
     //    Button[] buttons = new Button[100];
     public void initialize(URL location, ResourceBundle resources) {

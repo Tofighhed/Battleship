@@ -16,11 +16,14 @@ public static void check_start_game(){
         }
 
 }
-public static void check_status(){
+public static void check_status(Ground g){
     check=Messege.get_status();
     if (check.getCode()==1){
+        g.game_id=check.getGame_id();
+
         //rival find
         //send your board
+//        Messege.init_game();
     }
     if (check.getCode()==2){
         //messege:waiting for your rival board

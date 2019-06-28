@@ -3,6 +3,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.Button?>
 <HBox prefHeight="1000.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GroundController">
 
    <HBox prefHeight="300" prefWidth="300">
@@ -35,5 +36,5 @@
       <VBox fx:id="vbb9" prefHeight="300" prefWidth="30" />
       <VBox fx:id="vbb10" prefHeight="300" prefWidth="30" />
    </HBox>
-
+<!--<Button fx:id="make_ground" prefHeight="300"prefWidth="50"/>-->
 </HBox>
