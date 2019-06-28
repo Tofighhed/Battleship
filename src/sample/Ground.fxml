@@ -4,7 +4,8 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Button?>
-<HBox prefHeight="1000.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GroundController">
+<?import javafx.geometry.Insets?>
+<HBox prefHeight="1000.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GroundController">
 
    <HBox prefHeight="300" prefWidth="300">
       <VBox fx:id="vba1" prefHeight="300" prefWidth="30" />
@@ -36,5 +37,17 @@
       <VBox fx:id="vbb9" prefHeight="300" prefWidth="30" />
       <VBox fx:id="vbb10" prefHeight="300" prefWidth="30" />
    </HBox>
+
+   <HBox prefHeight="300" prefWidth="20"/>
+
+   <VBox fx:id="btns" prefHeight="300"  spacing="10" prefWidth="150"  >
+
+      <Button text="Start" />
+
+      <Button text="Create board" />
+
+      <Button text="Leave game" />
+
+   </VBox>
 <!--<Button fx:id="make_ground" prefHeight="300"prefWidth="50"/>-->
 </HBox>

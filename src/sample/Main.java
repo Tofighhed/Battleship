@@ -39,7 +39,7 @@ public class Main extends Application {
             primaryStage = new Stage(); // redundant
         }
         Parent root = FXMLLoader.load(getClass().getResource("Ground.fxml"));
-        primaryStage.setScene(new Scene(root, 1000, 400));
+        primaryStage.setScene(new Scene(root, 900, 400));
         primaryStage.show();
     }
 
