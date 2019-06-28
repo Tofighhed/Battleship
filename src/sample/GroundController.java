@@ -6,17 +6,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import model.*;
-//import javafx.scene.control.Button;
-//import javafx.scene.control.*;
+import model.Analysis;
+import model.Ground;
+import model.Pos;
 
-import javax.swing.*;
-import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+//import javafx.scene.control.Button;
+//import javafx.scene.control.*;
+
 public class GroundController implements Initializable {
+    public static boolean isOnline = true; // online game with server false : 2 player offline
     public static ArrayList<Button> buttonlist = new ArrayList<>();
     public static ArrayList<Buttonmain> a = new ArrayList<>();
     public static ArrayList<Buttonmain> b = new ArrayList<>();

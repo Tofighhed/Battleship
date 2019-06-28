@@ -1,37 +1,25 @@
 package sample;
 
-import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ButtonBar;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+import java.io.IOException;
 
+public class Main extends Application {
+    public static Main main = null;
+    public Stage primaryStage = null ;
+
+    // firs start .... [beganning]
     @Override
     public void start(Stage primaryStage) throws Exception{
-
-
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("Ground.fxml"));
-//        loader.setResources(this.init(). .getResourceBundle());
-//        loader.load();
-//        GroundController groundController = loader.getController();
-//        groundController.set_vbox();
-
-
-
-        Parent root = FXMLLoader.load(getClass().getResource("Ground.fxml"));
-//        primaryStage.setTitle("Hello World");
-//        primaryStage.setResizable(false);
-
-//        ((GroundController)root).set_vbox();
-        primaryStage.setScene(new Scene(root, 1000, 400));
-
-//        primaryStage.
+        this.primaryStage = primaryStage; // store corent stage [ current Active window]
+        Parent root = FXMLLoader.load(getClass().getResource("MainMenue.fxml"));
+        primaryStage.setScene(new Scene(root, 300, 300));
         primaryStage.show();
-//        groundController.set_vbox();
+        main = this; // set for access
     }
 
 
@@ -44,4 +32,16 @@ public class Main extends Application {
 //
         launch(args);
     }
+
+    public void open_game_panel(boolean online ) throws IOException {
+        GroundController.isOnline = online; // set is online or not ...
+        if (primaryStage == null){
+            primaryStage = new Stage(); // redundant
+        }
+        Parent root = FXMLLoader.load(getClass().getResource("Ground.fxml"));
+        primaryStage.setScene(new Scene(root, 1000, 400));
+        primaryStage.show();
+    }
+
+
 }
