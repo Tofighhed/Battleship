@@ -5,14 +5,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.layout.VBox;
-import model.Category;
-import model.Messege;
+import model.*;
 //import javafx.scene.control.Button;
-import javafx.scene.control.*;
-import model.Pos;
+//import javafx.scene.control.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
@@ -275,9 +273,7 @@ public class GroundController implements Initializable {
 //    Button b99=new Button();
 
 
-
-
-    public void set_vbox(){
+    public void set_vbox() {
         System.out.println("set vbox started");
         String pre_ida = "a";
         String pre_idb = "b";
@@ -286,7 +282,7 @@ public class GroundController implements Initializable {
                 Buttonmain button = new Buttonmain();
                 button.setPrefWidth(30);
                 button.setPrefHeight(30);
-                button.setId(pre_ida +  i + ""+ j);
+                button.setId(pre_ida + i + "" + j);
                 button.setOnAction(eventEventHandler);
                 getvBoxea()[i].getChildren().add(button);
                 a.add(button);
@@ -295,7 +291,7 @@ public class GroundController implements Initializable {
                 Buttonmain button2 = new Buttonmain();
                 button2.setPrefWidth(30);
                 button2.setPrefHeight(30);
-                button2.setId(pre_idb +  i + ""+ j);
+                button2.setId(pre_idb + i + "" + j);
                 button2.setOnAction(eventEventHandler);
                 getvBoxeb()[i].getChildren().add(button2);
                 b.add(button2);
@@ -304,7 +300,7 @@ public class GroundController implements Initializable {
         }
     }
 
-//    Button[] buttons = new Button[100];
+    //    Button[] buttons = new Button[100];
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("INITIALIZED >>>>>>>>>>>>>>>>>>");
 //        super.in
@@ -314,31 +310,37 @@ public class GroundController implements Initializable {
 //        hboxx.getChildren().addAll(buttonlist);
 
 
-
         set_vbox();
     }
-
-//@FXML
-// Buttonmain b99=new Buttonmain();
-
-
-
 
 
     EventHandler<javafx.event.ActionEvent> eventEventHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
-            String btn_id =  ((Button) event.getSource()).getId();
+            String btn_id = ((Button) event.getSource()).getId();
             System.out.println(btn_id);
 
-            if (btn_id.startsWith("a")){ // our map
-                Messege.get_status2();
-                Buttonmain buttonmain  = a.get(new Pos(btn_id).combine);
-                if (buttonmain.can_click){
+            if (btn_id.startsWith("b")) { // our map
+
+
+                Analysis.check_start_game();
+//                Analysis.check_status();
+                Buttonmain buttonmain = b.get(new Pos(btn_id).combine);
+                if (buttonmain.can_click) {
                     buttonmain.setStyle("-fx-background-color: #ff1145");
                 }
 
-            }else {// enemy map
+            } else {// self map
+
+                Ground ground = new Ground(64);
+                ground.make_ground();
+                for (int i = 0; i < 10; i++) {
+                    for (int j = 0; j < 10; j++) {
+                        int val = ground.Board_array[i][j];
+                        if (val == 1)
+                            a.get(i * 10 + j).setStyle("-fx-background-color:#00ff00");
+                    }
+                }
 
             }
 
@@ -367,9 +369,6 @@ public class GroundController implements Initializable {
 
         }*/
     }
-
-
-
 
 
     @FXML

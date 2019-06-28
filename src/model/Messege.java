@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 import network.Retrofit_Server;
 import retrofit2.Response;
 
@@ -8,10 +10,20 @@ import java.io.IOException;
 public class Messege {
 
 
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
     private String status;
+    @SerializedName("game id")
     private int game_id;
+    private String result;
     private int code;
-    private String detail;
+    private String[] detail;
     private String rival;
     private String[] message;
     private String[] last_hit[];
@@ -44,11 +56,11 @@ public class Messege {
         this.code = code;
     }
 
-    public String getDetail() {
-        return detail;
+    public String getDetail(int i) {
+        return detail[i];
     }
 
-    public void setDetail(String detail) {
+    public void setDetail(String[] detail) {
         this.detail = detail;
     }
 
@@ -101,7 +113,7 @@ public class Messege {
     }
 
 
-//    public static void get_messege (){
+    //    public static void get_messege (){
 //        Retrofit_Server retrofit_server=new Retrofit_Server();
 //        retrofit_server.getTService().get_status(44).enqueue(new Callback<Middle>(){
 //
@@ -129,30 +141,86 @@ public class Messege {
 //
 //
 //
-//    }
-
-    public static void get_status2() {
+//    }p
+    public static Messege start_game() {
+//        System.out.println(Analysis.check.game_id);
         Retrofit_Server retrofit_server = new Retrofit_Server();
+
         try {
-            Response<Messege> m = retrofit_server.getTService().get_status(42).execute();
-//            System.out.println("SIZE : " + m.body().messeges.size());
+            Response<Messege> m = retrofit_server.getTService().start_game().execute();
+            if (m.code() > 250) {
+                String error = m.errorBody().string();
+                Gson gson = new Gson();
+                return gson.fromJson(error, Messege.class);
+            }
+            System.out.println(" asdasdasd :::" + m.body().detail);
+//            System.out.println(" asdasdasd :::"+m.body().game_id);
+//            System.out.println("BOOOOOO ::: "+m.body().getCode());
+
+
+
             if (m.body() == null) {
                 System.out.println("Respons wass NUll ");
                 System.out.println(m.message());
-                return;
+                return m.body();
+            } else {
+                return m.body();
             }
-            Messege mm = m.body();
-            if (mm.message.length > 0)
-                System.out.println("message : " + m.body().message[0]);
-            System.out.println("code : " + m.body().code);
-//            System.out.println("First : " + m.body().messeges.get(0).message);
 
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage() + "\nBody Is Empty");
+        } catch (java.net.UnknownHostException e) {
+            System.out.println(e.getMessage() + "\nCannot Connect to Network");
         } catch (IOException N) {
             N.printStackTrace();
-        } catch (NullPointerException e) {
-            System.out.println(e.getMessage() + "4as5d4");
         }
+        return start_game();
+    }
 
+
+    ////////////////////////////////////////////////////
+    public static Messege get_status() {
+        Retrofit_Server retrofit_server = new Retrofit_Server();
+        try {
+            Response<Messege> m = retrofit_server.getTService().get_status(63).execute();
+            if (m.body() == null) {
+                System.out.println("Respons wass NUll ");
+                System.out.println(m.message());
+            } else {
+                return m.body();
+            }
+//            if (mm.message.length > 0) {
+//                System.out.println("message : " + m.body().message[0]);
+//                System.out.println("code : " + m.body().code);
+//            }
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage() + "\nBody Is Empty");
+        } catch (java.net.UnknownHostException e) {
+            System.out.println(e.getMessage() + "\nCannot Connect to Network");
+        } catch (IOException N) {
+            N.printStackTrace();
+        }
+        return get_status();
+
+    }
+
+    public static Messege move(Pos pso) {
+        Retrofit_Server retrofit_server = new Retrofit_Server();
+        Messege mmm = new Messege();
+        try {
+            Response<Messege> m = retrofit_server.getTService().move(pso).execute();
+            if (m.body() == null) {
+                System.out.println("Respons wass NUll ");
+                System.out.println(m.message());
+                return m.body();
+            } else {
+                return m.body();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 //        Retrofit_Server retrofit_server = new Retrofit_Server();
 //        retrofit_server.getTService().get_category().enqueue(new Callback<Middle>() {
@@ -178,6 +246,49 @@ public class Messege {
 //                System.out.println("EXCEPTION : " + throwable.getMessage());
 //            }
 //        });
+
+
+//    public void check_start_game() {
+//    "result": "game created",
+//        check=Messege.start_game();
+//        this=Messege.start_game();
+//        if (this.getDetail(0).equalsIgnoreCase("You have an unfinished game.")){
+//            System.out.println(this.getDetail(0));
+//            return;
+//        }
+//        if (this.getStatus().equalsIgnoreCase("ok")) {
+//            System.out.println("game created");
+//        }
+//        if (this.getCode() == 400) {
+//            System.out.println(this.getDetail(0));
+//        }
+//    }
+//
+//    public void check_status() {
+//        Messege check = this;
+//        if (check.getCode() == 1) {
+//            //rival find
+//            //send your board
+//        }
+//        if (check.getCode() == 2) {
+//            //messege:waiting for your rival board
+//        }
+//        if (check.getCode() == 3) {
+//            //messege : its your hit
+//            //last hit:[n,m]
+//        }
+//
+//        if (check.getCode() == 4) {
+//            //messege:waiting for your rival move
+//        }
+//        if (check.getCode() == 5) {
+//            //messege : game is finished
+//            //winner playerx
+//        }
+//        if (check.getCode() == 6) {
+//            //messege : cancelld by user
+//        }
+//    }
 
 }
 
