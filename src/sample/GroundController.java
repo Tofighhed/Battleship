@@ -4,16 +4,11 @@ import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import model.*;
 
-import javax.swing.*;
-import java.awt.*;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -333,7 +328,12 @@ public class GroundController implements Initializable {
             if (btn_id.startsWith("b")) { // our map
 
 //                Buttonmain buttonmain = b.get(new Pos(btn_id).combine);
-                my_pos=new Pos(btn_id);
+                my_pos = new Pos(btn_id , Game.game_id); // server wants valid game id
+//                Messege v = Messege.move(my_pos); // LET HIT THIS Position
+//                if (v == null ) return;
+//                v.setCode();
+//                Analysis.check = v;
+
                 Analysis.check_my_movment();
 
             } else {// self map

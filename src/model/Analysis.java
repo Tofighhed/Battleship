@@ -22,6 +22,8 @@ public class Analysis {
     }
 
     public static void check_status() {
+        System.out.println("MESSAGE COD : "  + check.getCode());
+
         if (check.getCode() == 0) {
             System.out.println(check.getMessage()[0]);
         }
@@ -37,17 +39,16 @@ public class Analysis {
             System.out.println(check.getMessage()[0]);
         }
         if (check.getCode() == 3) {
+            GroundController.can_move=true; // THIS CODE CAN MOVE ! NOT IN DOC!
             System.out.println(check.getMessage()[0]);
             Analysis.fix_last_hit();
-            if (check.real_last_hit.length == 0) {
+            if (check.real_last_hit == null  || check.real_last_hit.length == 0) {
                 return;
             } else {
                 check_enemy_movment(check.real_last_hit);
             }
-            GroundController.can_move=true;
             //last hit:[n,m]
             //we should call move method and check enemy hit for our ground
-
         }
 
         if (check.getCode() == 4) {
@@ -85,7 +86,11 @@ public class Analysis {
 
     public static void check_my_movment(){
 
-        check=Messege.move(GroundController.my_pos);
+        check= Messege.move(GroundController.my_pos);
+        if (check == null) {
+            System.out.println("MOVE RESULT WAS NULL GO TO HELL!");
+            return;
+        }
 
         if (check.getShip()){
             int first = GroundController.my_pos.x;

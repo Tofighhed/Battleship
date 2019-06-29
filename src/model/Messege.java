@@ -4,8 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.annotations.SerializedName;
 import network.Retrofit_Server;
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 import sample.GroundController;
 
@@ -43,8 +41,8 @@ public class Messege {
     }
 
     private String winner;
-    private Boolean ship;
-    private boolean win;
+    private boolean ship = false;
+    private boolean win = false;
 
 
     public String getStatus() {
@@ -111,7 +109,7 @@ public class Messege {
         this.winner = winner;
     }
 
-    public Boolean getShip() {
+    public boolean getShip() {
         return ship;
     }
 
@@ -222,6 +220,8 @@ public class Messege {
 //    }
 
     public static Messege move(Pos pso) {
+        pso = GroundController.my_pos;
+        System.out.println("MOVE API x: " + pso.x + "y: " + pso.y + "game_id: " + pso.game_id);
         Retrofit_Server retrofit_server = new Retrofit_Server();
         try {
             Response<Messege> m = retrofit_server.getTService().move(GroundController.my_pos).execute();
