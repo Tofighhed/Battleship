@@ -1,11 +1,13 @@
 package model;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.annotations.SerializedName;
 import network.Retrofit_Server;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import sample.GroundController;
 
 import java.io.IOException;
 
@@ -28,7 +30,18 @@ public class Messege {
     private String[] detail;
     private String rival;
     private String[] message;
-    private String[] last_hit[];
+    @SerializedName("last hits")
+    private String last_hits;
+     int[][] real_last_hit;
+
+    public int[][] getReal_last_hit() {
+        return real_last_hit;
+    }
+
+    public void setReal_last_hit(int[][] real_last_hit) {
+        this.real_last_hit = real_last_hit;
+    }
+
     private String winner;
     private Boolean ship;
     private boolean win;
@@ -82,12 +95,12 @@ public class Messege {
         this.message = message;
     }
 
-    public String[][] getLast_hit() {
-        return last_hit;
+    public String getLast_hit() {
+        return last_hits;
     }
 
-    public void setLast_hit(String[][] last_hit) {
-        this.last_hit = last_hit;
+    public void setLast_hit(String last_hit) {
+        this.last_hits = last_hit;
     }
 
     public String getWinner() {
@@ -155,6 +168,7 @@ public class Messege {
                 return gson.fromJson(error, Messege.class);
             }
             else {Game.game_id=m.body().getGame_id();
+                GroundController.ground1.game_id=Game.game_id;
                 return m.body();}
         } catch (NullPointerException e) {
             System.out.println(e.getMessage() + "\nBody Is Empty");
@@ -182,35 +196,35 @@ public class Messege {
 //    }
 
     ////////////////////////////////////////////////////
-    public static Messege get_status() {
-        Retrofit_Server retrofit_server = new Retrofit_Server();
-        try {
-            Response<Messege> m = retrofit_server.getTService().get_status(Game.game_id).execute();
-            if (m.body() == null) {
-                System.out.println("Respons wass NUll ");
-                System.out.println(m.message());
-            } else {
-                return m.body();
-            }
-//            if (mm.message.length > 0) {
-//                System.out.println("message : " + m.body().message[0]);
-//                System.out.println("code : " + m.body().code);
+//    public static Messege get_status() {
+//        Retrofit_Server retrofit_server = new Retrofit_Server();
+//        try {
+//            Response<Messege> m = retrofit_server.getTService().get_status(Game.game_id).execute();
+//            if (m.body() == null) {
+//                System.out.println("Respons wass NUll ");
+//                System.out.println(m.message());
+//            } else {
+//                return m.body();
 //            }
-        } catch (NullPointerException e) {
-            System.out.println(e.getMessage() + "\nBody Is Empty");
-        } catch (java.net.UnknownHostException e) {
-            System.out.println(e.getMessage() + "\nCannot Connect to Network");
-        } catch (IOException N) {
-            N.printStackTrace();
-        }
-        return null;
-
-    }
+////            if (mm.message.length > 0) {
+////                System.out.println("message : " + m.body().message[0]);
+////                System.out.println("code : " + m.body().code);
+////            }
+//        } catch (NullPointerException e) {
+//            System.out.println(e.getMessage() + "\nBody Is Empty");
+//        } catch (java.net.UnknownHostException e) {
+//            System.out.println(e.getMessage() + "\nCannot Connect to Network");
+//        } catch (IOException N) {
+//            N.printStackTrace();
+//        }
+//        return null;
+//
+//    }
 
     public static Messege move(Pos pso) {
         Retrofit_Server retrofit_server = new Retrofit_Server();
         try {
-            Response<Messege> m = retrofit_server.getTService().move(pso).execute();
+            Response<Messege> m = retrofit_server.getTService().move(GroundController.my_pos).execute();
             if (m.body() == null) {
                 System.out.println("Respons wass NUll ");
                 System.out.println(m.message());
@@ -231,10 +245,10 @@ public class Messege {
 
 
 
-    public static Messege init_game(Ground ground){
+    public static Messege init_game(){
         Retrofit_Server retrofit_server= new Retrofit_Server();
         try {
-            Response<Messege> m =retrofit_server.getTService().init_game(ground).execute();
+            Response<Messege> m =retrofit_server.getTService().init_game(GroundController.ground1).execute();
             if (m.body() == null) {
                 System.out.println("Respons wass NUll ");
                 System.out.println(m.message());
@@ -248,6 +262,10 @@ public class Messege {
             System.out.println(e.getMessage() + "\nCannot Connect to Network");
         } catch (IOException N) {
             N.printStackTrace();
+        }
+        catch (JsonSyntaxException s){
+            System.out.println("lets do it");
+            return null;
         }
         return null;
     }

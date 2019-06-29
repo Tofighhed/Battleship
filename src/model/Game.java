@@ -15,7 +15,7 @@ public class Game {
     public static int count = 0;
     public static void timer() {
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new time(), 0, 1900);
+        timer.scheduleAtFixedRate(new time(), 0, 2900);
 
     }
 
@@ -24,7 +24,6 @@ public class Game {
         @Override
         public void run() {
             System.out.println("TIMER RUN : " + count);
-            Analysis.check_status();
             Retrofit_Server retrofit_server = new Retrofit_Server();
 
             retrofit_server.getTService().get_status(Game.game_id).enqueue(new Callback<Messege>() {

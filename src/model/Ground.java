@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public  class Ground {
-public Ground(int gm){
-    game_id=gm;
-}
+//public Ground(int gm){
+//    game_id=gm;
+//}
 public Ground(){}
-    public int game_id;
-    public int[][]  Board_array=new int[10][10];
+    public int game_id=0;
+    public int[][]  board_array=new int[10][10];
 
 
     public void make_ground(){
@@ -29,14 +29,14 @@ public Ground(){}
             if (list_choosed.contains(rand)){continue;}
 
             if (satr){
-                Board_array[flag]=temp[rand];
+                board_array[flag]=temp[rand];
                 list_choosed.add(rand);
 
             }
             else {
                 int[] vals = temp[rand];
                 for (int i = 0; i < 10; i++) {
-                    Board_array[i][flag] = vals[i];
+                    board_array[i][flag] = vals[i];
                 }
                 list_choosed.add(rand);
             }

@@ -7,6 +7,7 @@ import model.Middle;
 import model.Pos;
 import retrofit2.Call;
 import retrofit2.http.*;
+import sample.GroundController;
 
 import javax.swing.*;
 
@@ -30,9 +31,9 @@ public interface Requests {
     @Headers({"Authorization: token 34c12e4f0142d6047ce6d519036260ff23fdea4c" , "Content-Type: application/json"})
     Call<Messege> get_status (@Path("game_id") int geme_id);
 
-    @POST ("api/init_game")
+    @POST ("api/init_game/")
     @Headers({"Authorization: token 34c12e4f0142d6047ce6d519036260ff23fdea4c" , "Content-Type: application/json"})
-    Call<Messege> init_game (Ground ground);
+    Call<Messege> init_game (@Body Ground ground);
 
     @POST ("api/move/")
     @Headers({"Authorization: token 34c12e4f0142d6047ce6d519036260ff23fdea4c" , "Content-Type: application/json"})

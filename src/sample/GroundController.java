@@ -1,5 +1,6 @@
 package sample;
 
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -8,11 +9,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import model.Analysis;
-import model.Game;
-import model.Ground;
-import model.Pos;
+import model.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
@@ -28,7 +27,9 @@ public class GroundController implements Initializable {
     public static ArrayList<Buttonmain> a = new ArrayList<>();
     public static ArrayList<Buttonmain> b = new ArrayList<>();
     public static boolean make_board=false;
-    public static Ground ground1 = new Ground(64);
+    public static Ground ground1 = new Ground();
+    public static Pos my_pos;
+    public static boolean can_move=false;
     public VBox vba1;
     public VBox vba2;
     public VBox vba3;
@@ -318,13 +319,6 @@ public class GroundController implements Initializable {
     //    Button[] buttons = new Button[100];
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("INITIALIZED >>>>>>>>>>>>>>>>>>");
-//        super.in
-//        List<Button> buttonlist = new ArrayList<Button>();
-//        List<Button> list = new ArrayList<>();
-
-//        hboxx.getChildren().addAll(buttonlist);
-
-
         set_vbox();
     }
 
@@ -332,18 +326,15 @@ public class GroundController implements Initializable {
     EventHandler<javafx.event.ActionEvent> eventEventHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
+            if (!can_move){return;}
             String btn_id = ((Button) event.getSource()).getId();
             System.out.println(btn_id);
 
             if (btn_id.startsWith("b")) { // our map
 
-
-//                Analysis.check_start_game();
-//                Analysis.check_status();
-                Buttonmain buttonmain = b.get(new Pos(btn_id).combine);
-                if (buttonmain.can_click) {
-                    buttonmain.setStyle("-fx-background-color: #ff1145");
-                }
+//                Buttonmain buttonmain = b.get(new Pos(btn_id).combine);
+                my_pos=new Pos(btn_id);
+                Analysis.check_my_movment();
 
             } else {// self map
 
@@ -393,7 +384,6 @@ public class GroundController implements Initializable {
         }
         else {
             Analysis.check_start_game();
-//            Analysis.check_status(ground1);
             Game.timer();
         }
     }
@@ -406,16 +396,18 @@ public class GroundController implements Initializable {
         make_board=true;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                int val = ground1.Board_array[i][j];
+                int val = ground1.board_array[i][j];
                 if (val == 1)
                     a.get(i * 10 + j).setStyle("-fx-background-color:#00ff00");
+
             }
         }
 
     }
     @FXML
     public void leave_game(javafx.event.ActionEvent event){
-
+        Pos pos=new Pos("b21");
+        System.out.println(new Gson().toJson(pos));
 
     }
 
