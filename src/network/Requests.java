@@ -24,10 +24,10 @@ public interface Requests {
     @POST("api/start/")
     @Headers({"Authorization: token 34c12e4f0142d6047ce6d519036260ff23fdea4c" , "Content-Type: application/json"})
     Call<Messege> start_game();
-    
+
 
     @GET("api/status/{game_id}")
-    @Headers({"Authorization: token 34c12e4f0142d6047ce6d519036260ff23fdea4c"})
+    @Headers({"Authorization: token 34c12e4f0142d6047ce6d519036260ff23fdea4c" , "Content-Type: application/json"})
     Call<Messege> get_status (@Path("game_id") int geme_id);
 
     @POST ("api/init_game")

@@ -154,7 +154,8 @@ public class Messege {
                 Gson gson = new Gson();
                 return gson.fromJson(error, Messege.class);
             }
-            else {return m.body();}
+            else {Game.game_id=m.body().getGame_id();
+                return m.body();}
         } catch (NullPointerException e) {
             System.out.println(e.getMessage() + "\nBody Is Empty");
         } catch (java.net.UnknownHostException e) {
@@ -184,7 +185,7 @@ public class Messege {
     public static Messege get_status() {
         Retrofit_Server retrofit_server = new Retrofit_Server();
         try {
-            Response<Messege> m = retrofit_server.getTService().get_status(Analysis.check.game_id).execute();
+            Response<Messege> m = retrofit_server.getTService().get_status(Game.game_id).execute();
             if (m.body() == null) {
                 System.out.println("Respons wass NUll ");
                 System.out.println(m.message());

@@ -17,7 +17,7 @@ public static void check_start_game(){
 
 }
 
-public static void check_status(Ground g){
+public static void check_status(){
 //    check=Messege.get_status();
 //    g.game_id=check.getGame_id();
     if (check.getCode()==0){

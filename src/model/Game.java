@@ -11,11 +11,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Game {
-
+    public static int game_id;
     public static int count = 0;
     public static void timer() {
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new time(), 0, 3000);
+        timer.scheduleAtFixedRate(new time(), 0, 1900);
 
     }
 
@@ -24,21 +24,21 @@ public class Game {
         @Override
         public void run() {
             System.out.println("TIMER RUN : " + count);
-//            Analysis.check_status(GroundController.ground1);
+            Analysis.check_status();
             Retrofit_Server retrofit_server = new Retrofit_Server();
 
-            retrofit_server.getTService().get_status(64).enqueue(new Callback<Messege>() {
+            retrofit_server.getTService().get_status(Game.game_id).enqueue(new Callback<Messege>() {
                 @Override
                 public void onResponse(Call<Messege> call, Response<Messege> response) {
                     if (response.isSuccessful() && response.body() != null) {
                         Analysis.check = response.body();
-                        Analysis.check_status(GroundController.ground1);
+                        Analysis.check_status();
                     } else {
                         try {
                             Gson gson = new Gson();
                             Messege messege = gson.fromJson(response.errorBody().string(), Messege.class);
                             Analysis.check = messege;
-                            Analysis.check_status(GroundController.ground1);
+                            Analysis.check_status();
                         } catch (Exception e) {
                             System.out.println("Error casting server message");
                             System.out.println(e.getMessage());
