@@ -3,14 +3,18 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import model.Analysis;
+import model.Game;
 import model.Ground;
 import model.Pos;
 
 import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -23,7 +27,8 @@ public class GroundController implements Initializable {
     public static ArrayList<Button> buttonlist = new ArrayList<>();
     public static ArrayList<Buttonmain> a = new ArrayList<>();
     public static ArrayList<Buttonmain> b = new ArrayList<>();
-
+    public static boolean make_board=false;
+    public static Ground ground1 = new Ground(64);
     public VBox vba1;
     public VBox vba2;
     public VBox vba3;
@@ -275,6 +280,13 @@ public class GroundController implements Initializable {
 //    @FXML
 //    Button b99=new Button();
 
+    @FXML
+    Button start=new Button();
+    @FXML
+    Button c_board=new Button();
+    @FXML
+    Button l_game=new Button();
+
 
     public void set_vbox() {
         System.out.println("set vbox started");
@@ -302,11 +314,6 @@ public class GroundController implements Initializable {
             }
         }
     }
-//    @FXML
-//    Button make_ground=new Button();
-//    public void setMake_ground(ActiveEvent activeEvent){
-//
-//    }
 
     //    Button[] buttons = new Button[100];
     public void initialize(URL location, ResourceBundle resources) {
@@ -331,7 +338,7 @@ public class GroundController implements Initializable {
             if (btn_id.startsWith("b")) { // our map
 
 
-                Analysis.check_start_game();
+//                Analysis.check_start_game();
 //                Analysis.check_status();
                 Buttonmain buttonmain = b.get(new Pos(btn_id).combine);
                 if (buttonmain.can_click) {
@@ -339,16 +346,6 @@ public class GroundController implements Initializable {
                 }
 
             } else {// self map
-
-                Ground ground = new Ground(64);
-                ground.make_ground();
-                for (int i = 0; i < 10; i++) {
-                    for (int j = 0; j < 10; j++) {
-                        int val = ground.Board_array[i][j];
-                        if (val == 1)
-                            a.get(i * 10 + j).setStyle("-fx-background-color:#00ff00");
-                    }
-                }
 
             }
 
@@ -380,9 +377,6 @@ public class GroundController implements Initializable {
 
 
     @FXML
-    Button asd = new Button();
-
-    @FXML
     public void get_cat(javafx.event.ActionEvent event) {
         sett();
     }
@@ -390,5 +384,39 @@ public class GroundController implements Initializable {
 // public void sddd(ActionListener aaa){
 //
 //    }
+
+    @FXML
+    public void setStart(javafx.event.ActionEvent event){
+        if (!make_board){
+            System.out.println("create board first");
+            return;
+        }
+        else {
+            Analysis.check_start_game();
+//            Analysis.check_status(ground1);
+            Game.timer();
+        }
+    }
+    @FXML
+    public void create_board(javafx.event.ActionEvent event){
+    if (make_board){
+        return;
+    }
+        ground1.make_ground();
+        make_board=true;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                int val = ground1.Board_array[i][j];
+                if (val == 1)
+                    a.get(i * 10 + j).setStyle("-fx-background-color:#00ff00");
+            }
+        }
+
+    }
+    @FXML
+    public void leave_game(javafx.event.ActionEvent event){
+
+
+    }
 
 }

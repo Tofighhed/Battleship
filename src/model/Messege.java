@@ -3,6 +3,8 @@ package model;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import network.Retrofit_Server;
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.io.IOException;
@@ -152,6 +154,7 @@ public class Messege {
                 Gson gson = new Gson();
                 return gson.fromJson(error, Messege.class);
             }
+            else {return m.body();}
         } catch (NullPointerException e) {
             System.out.println(e.getMessage() + "\nBody Is Empty");
         } catch (java.net.UnknownHostException e) {
@@ -159,14 +162,29 @@ public class Messege {
         } catch (IOException N) {
             N.printStackTrace();
         }
-        return start_game();
+        return null;
     }
+
+//    public static Messege st_gm(){
+//        Retrofit_Server retrofit_server = new Retrofit_Server();
+//        retrofit_server.getTService().start_game().enqueue(new Callback<Messege>() {
+//            @Override
+//            public void onResponse(Call<Middle> call, Response<Middle> response) {
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Middle> call, Throwable throwable) {
+//
+//            }
+//        }
+//    }
 
     ////////////////////////////////////////////////////
     public static Messege get_status() {
         Retrofit_Server retrofit_server = new Retrofit_Server();
         try {
-            Response<Messege> m = retrofit_server.getTService().get_status(63).execute();
+            Response<Messege> m = retrofit_server.getTService().get_status(Analysis.check.game_id).execute();
             if (m.body() == null) {
                 System.out.println("Respons wass NUll ");
                 System.out.println(m.message());
@@ -184,7 +202,7 @@ public class Messege {
         } catch (IOException N) {
             N.printStackTrace();
         }
-        return get_status();
+        return null;
 
     }
 

@@ -21,4 +21,7 @@ public class Pos {
         side = pos.charAt(0) + "";
         game_id = gm_id;
     }
+//    public static int[][] str_to_arr(String str){
+//        int first
+//    }
 }

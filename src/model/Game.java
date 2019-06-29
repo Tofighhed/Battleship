@@ -1,19 +1,23 @@
 package model;
 
-public class Game {
+import sample.*;
+import java.util.TimerTask;
+import java.util.Timer;
 
-    public static void play(){
-        boolean play=true;
+public class Game  {
 
-        while (play){
-
-            Analysis.check_start_game();
-
-
-
-
-        }
-
+    public static void timer(){
+        Timer timer=new Timer();
+        timer.schedule(new time(), 0, 3000);
     }
+
+   public static class time extends TimerTask{
+
+        @Override
+        public void run() {
+            Analysis.check_status(GroundController.ground1);
+        }
+    }
+
 
 }

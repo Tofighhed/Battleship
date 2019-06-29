@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox prefHeight="1000.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GroundController">
+<HBox prefHeight="1000.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GroundController">
 
    <HBox prefHeight="300" prefWidth="300">
       <VBox fx:id="vba1" prefHeight="300" prefWidth="30" />
@@ -36,4 +37,16 @@
       <VBox fx:id="vbb10" prefHeight="300" prefWidth="30" />
    </HBox>
 
+   <HBox prefHeight="300" prefWidth="20" />
+
+   <VBox fx:id="btns" prefHeight="300" prefWidth="150" spacing="10">
+
+      <Button fx:id="start" onAction="#setStart" style="-fx-background-color: #26A65B;" text="Start" />
+
+      <Button fx:id="c_board" onAction="#create_board" style="-fx-background-color: #19B5FE;" text="Create board" />
+
+      <Button fx:id="l_game" onAction="#leave_game" style="-fx-background-color: e74c3c;" text="Leave game" />
+
+   </VBox>
+<!--<Button fx:id="make_ground" prefHeight="300"prefWidth="50"/>-->
 </HBox>
