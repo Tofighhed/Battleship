@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import model.*;
 
@@ -364,19 +365,18 @@ public class GroundController implements Initializable {
 
         }*/
     }
-
-
     @FXML
-    public void get_cat(javafx.event.ActionEvent event) {
-        sett();
+    Label label=laabel;
+
+    public static Label laabel=new Label();
+
+    public static void Set_label_(String str){
+   laabel.setText(str);
     }
-//    @FXML
-// public void sddd(ActionListener aaa){
-//
-//    }
 
     @FXML
     public void setStart(javafx.event.ActionEvent event){
+
         if (!make_board){
             System.out.println("create board first");
             return;
@@ -386,11 +386,14 @@ public class GroundController implements Initializable {
             Game.timer();
         }
     }
+
     @FXML
     public void create_board(javafx.event.ActionEvent event){
+
     if (make_board){
         return;
     }
+
         ground1.make_ground();
         make_board=true;
         for (int i = 0; i < 10; i++) {
@@ -403,9 +406,11 @@ public class GroundController implements Initializable {
         }
 
     }
+
     @FXML
     public void leave_game(javafx.event.ActionEvent event){
         Messege.quite_game();
+
     }
 
 }

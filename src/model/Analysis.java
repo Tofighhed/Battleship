@@ -111,9 +111,10 @@ public class Analysis {
         }
 
     }
-//    public static void check_quit{
-//
-//    }
+    public static void check_quit(Message2 message2){
+        System.out.println(message2.message);
+        return;
+    }
 
 
 }

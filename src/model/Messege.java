@@ -272,7 +272,7 @@ public class Messege {
         return null;
     }
 
-    public static void quite_game() {
+    public static Message2 quite_game() {
         Cga cga = new Cga(Game.game_id);
         Retrofit_Server retrofit_server = new Retrofit_Server();
         try {
@@ -282,27 +282,29 @@ public class Messege {
                 Gson gson = new Gson();
                 Message2 messege = gson.fromJson(m.errorBody().string(), Message2.class);
 //                Analysis.check = messege;
+                Analysis.check_quit(messege);
                 // FIXME: 30/06/2019 ANALYSIS MESSAGE 2
-                return;
+                return messege;
             } else {
                 // FIXME: 30/06/2019 ANALYSIS MESSAGE 2
+
                 System.out.println("QUIT RESPONS : " + m.body().message);
                 if (m.body().detail != null)
                     System.out.println("QUIT RESPONS : " + m.body().detail.get(0));
 //                Analysis.check = m.body();
-                return;
+                return m.body();
 
             }
         } catch (java.net.UnknownHostException e) {
             System.out.println(e.getMessage() + "\nCannot Connect to Network");
         } catch (NullPointerException n) {
             System.out.println("Nuuuuuuuuuuuuul");
-            return;
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
+    return null;
     }
 
 
