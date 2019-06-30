@@ -5,6 +5,7 @@ import model.Messege;
 import model.Pos;
 import retrofit2.Call;
 import retrofit2.http.*;
+import sample.Cga;
 
 public interface Requests {
     static final String TOKEN = "34c12e4f0142d6047ce6d519036260ff23fdea4c"; // TOFIGH AD
@@ -38,7 +39,7 @@ public interface Requests {
 
     @POST ("api/quit/")
     @Headers({"Authorization: token " + TOKEN  , "Content-Type: application/json"})
-    Call<Messege> quite_game (@Body Messege messege); // ONLY GAME ID IS NEEDED
+    Call<Messege> quite_game (@Body Cga cga); // ONLY GAME ID IS NEEDED
 
 
 

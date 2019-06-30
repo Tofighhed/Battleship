@@ -5,6 +5,7 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.annotations.SerializedName;
 import network.Retrofit_Server;
 import retrofit2.Response;
+import sample.Cga;
 import sample.GroundController;
 
 import java.io.IOException;
@@ -166,6 +167,8 @@ public class Messege {
                 return gson.fromJson(error, Messege.class);
             }
             else {Game.game_id=m.body().getGame_id();
+                Cga.game_id=Game.game_id;
+//            Analysis.check.game_id=m.body().getGame_id();
                 GroundController.ground1.game_id=Game.game_id;
                 return m.body();}
         } catch (NullPointerException e) {
@@ -270,8 +273,38 @@ public class Messege {
         return null;
     }
 
+public static void quite_game(){
+        Cga cga=new Cga();
+        Retrofit_Server retrofit_server=new Retrofit_Server();
+        try{
+
+            Response<Messege> m = retrofit_server.getTService().quite_game(cga).execute();
+            if (m.body()==null){
+                Gson gson = new Gson();
+                Messege messege = gson.fromJson(m.errorBody().string(), Messege.class);
+                Analysis.check = messege;
+                return;
+            }
+            else {
+                Analysis.check=m.body();
+                return;
+
+            }
+        }
+        catch (java.net.UnknownHostException e) {
+            System.out.println(e.getMessage() + "\nCannot Connect to Network");
+        }
+        catch (NullPointerException n){
+            System.out.println("Nuuuuuuuuuuuuul");
+            return;
+        }
+
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
+}
 
 
 //        Retrofit_Server retrofit_server = new Retrofit_Server();

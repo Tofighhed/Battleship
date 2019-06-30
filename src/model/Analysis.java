@@ -111,6 +111,9 @@ public class Analysis {
         }
 
     }
+//    public static void check_quit{
+//
+//    }
 
 
 }

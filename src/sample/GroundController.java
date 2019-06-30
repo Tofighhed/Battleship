@@ -406,8 +406,7 @@ public class GroundController implements Initializable {
     }
     @FXML
     public void leave_game(javafx.event.ActionEvent event){
-        Pos pos=new Pos("b21");
-        System.out.println(new Gson().toJson(pos));
+        Messege.quite_game();
 
     }
 
