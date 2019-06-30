@@ -1,6 +1,7 @@
 package network;
 
 import model.Ground;
+import model.Message2;
 import model.Messege;
 import model.Pos;
 import retrofit2.Call;
@@ -39,7 +40,7 @@ public interface Requests {
 
     @POST ("api/quit/")
     @Headers({"Authorization: token " + TOKEN  , "Content-Type: application/json"})
-    Call<Messege> quite_game (@Body Cga cga); // ONLY GAME ID IS NEEDED
+    Call<Message2> quite_game (@Body Cga cga); // ONLY GAME ID IS NEEDED
 
 
 

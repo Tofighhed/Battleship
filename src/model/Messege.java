@@ -31,7 +31,7 @@ public class Messege {
     private String[] message;
     @SerializedName("last hits")
     private String last_hits;
-     int[][] real_last_hit;
+    int[][] real_last_hit;
 
     public int[][] getReal_last_hit() {
         return real_last_hit;
@@ -165,12 +165,13 @@ public class Messege {
                 String error = m.errorBody().string();
                 Gson gson = new Gson();
                 return gson.fromJson(error, Messege.class);
-            }
-            else {Game.game_id=m.body().getGame_id();
-                Cga.game_id=Game.game_id;
+            } else {
+                Game.game_id = m.body().getGame_id();
+//                Cga.game_id=Game.game_id;
 //            Analysis.check.game_id=m.body().getGame_id();
-                GroundController.ground1.game_id=Game.game_id;
-                return m.body();}
+                GroundController.ground1.game_id = Game.game_id;
+                return m.body();
+            }
         } catch (NullPointerException e) {
             System.out.println(e.getMessage() + "\nBody Is Empty");
         } catch (java.net.UnknownHostException e) {
@@ -247,11 +248,10 @@ public class Messege {
     }
 
 
-
-    public static Messege init_game(){
-        Retrofit_Server retrofit_server= new Retrofit_Server();
+    public static Messege init_game() {
+        Retrofit_Server retrofit_server = new Retrofit_Server();
         try {
-            Response<Messege> m =retrofit_server.getTService().init_game(GroundController.ground1).execute();
+            Response<Messege> m = retrofit_server.getTService().init_game(GroundController.ground1).execute();
             if (m.body() == null) {
                 System.out.println("Respons wass NUll ");
                 System.out.println(m.message());
@@ -265,46 +265,45 @@ public class Messege {
             System.out.println(e.getMessage() + "\nCannot Connect to Network");
         } catch (IOException N) {
             N.printStackTrace();
-        }
-        catch (JsonSyntaxException s){
+        } catch (JsonSyntaxException s) {
             System.out.println("lets do it");
             return null;
         }
         return null;
     }
 
-public static void quite_game(){
-        Cga cga=new Cga();
-        Retrofit_Server retrofit_server=new Retrofit_Server();
-        try{
+    public static void quite_game() {
+        Cga cga = new Cga(Game.game_id);
+        Retrofit_Server retrofit_server = new Retrofit_Server();
+        try {
 
-            Response<Messege> m = retrofit_server.getTService().quite_game(cga).execute();
-            if (m.body()==null){
+            Response<Message2> m = retrofit_server.getTService().quite_game(cga).execute();
+            if (m.body() == null) {
                 Gson gson = new Gson();
-                Messege messege = gson.fromJson(m.errorBody().string(), Messege.class);
-                Analysis.check = messege;
+                Message2 messege = gson.fromJson(m.errorBody().string(), Message2.class);
+//                Analysis.check = messege;
+                // FIXME: 30/06/2019 ANALYSIS MESSAGE 2
                 return;
-            }
-            else {
-                Analysis.check=m.body();
+            } else {
+                // FIXME: 30/06/2019 ANALYSIS MESSAGE 2
+                System.out.println("QUIT RESPONS : " + m.body().message);
+                if (m.body().detail != null)
+                    System.out.println("QUIT RESPONS : " + m.body().detail.get(0));
+//                Analysis.check = m.body();
                 return;
 
             }
-        }
-        catch (java.net.UnknownHostException e) {
+        } catch (java.net.UnknownHostException e) {
             System.out.println(e.getMessage() + "\nCannot Connect to Network");
-        }
-        catch (NullPointerException n){
+        } catch (NullPointerException n) {
             System.out.println("Nuuuuuuuuuuuuul");
             return;
-        }
-
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
 
-}
+    }
 
 
 //        Retrofit_Server retrofit_server = new Retrofit_Server();
