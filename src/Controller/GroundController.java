@@ -138,18 +138,24 @@ public class GroundController implements Initializable {
     EventHandler<javafx.event.ActionEvent> eventEventHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
+            String btn_id = ((Button) event.getSource()).getId();
+            System.out.println(btn_id);
             if (isOnline) {
                 if (!can_move) {
                     return;
+                }else { // DO nothing fo a btns ..
+                    if (btn_id.startsWith("b")) { // enemy  map
+                        my_pos = new Pos(btn_id , Game.game_id); // server wants valid game id
+                        Analysis.check_my_movment();
+                    }
                 }
             }
             else {
                 if (!make_board)return;
                 if (!start_game)return;
-                String btn_id = ((Button) event.getSource()).getId();
-                System.out.println(btn_id);
 
-                if (btn_id.startsWith("b")) { // our map
+
+                if (btn_id.startsWith("b")) { // enemy map
 
                     my_pos = new Pos(btn_id); // server wants valid game id
                     if (isOnline) {

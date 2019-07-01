@@ -4,8 +4,8 @@ import retrofit2.Call;
 import retrofit2.http.*;
 
 public interface Requests {
-    static final String TOKEN = "34c12e4f0142d6047ce6d519036260ff23fdea4c"; // TOFIGH AD
-//    static final String TOKEN = "ef665066e1e7161089225252e3c7fc4c3ff3e93f"; // MORFI WIFI
+//    static final String TOKEN = "34c12e4f0142d6047ce6d519036260ff23fdea4c"; // TOFIGH AD
+    static final String TOKEN = "ef665066e1e7161089225252e3c7fc4c3ff3e93f"; // MORFI WIFI
     @POST("api/start/")
     @Headers({"Authorization: token " + TOKEN , "Content-Type: application/json"})
     Call<Messege> start_game();
