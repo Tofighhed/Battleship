@@ -6,31 +6,44 @@ import Controller.GroundController;
 public class Analysis {
 
     public static Messege check;
+    public static int[][] check_computer_move=new int[10][10];
 
     public static void check_start_game() {
         check = Messege.start_game();
-        if (check.getCode() == 400) {
-            System.out.println(check.getDetail(0) + "1:");
-            GroundController.set_lable(check.getDetail(0));
-            return;
-        }
-        System.out.println(check.getGame_id());
+
+        try {
+            if (check.getCode() == 400) {
+                System.out.println(check.getDetail(0) + "1:");
+                GroundController.set_lable(check.getDetail(0));
+                return;
+            }
+            System.out.println(check.getGame_id());
 //    GroundController.ground1.game_id=check.getGame_id();
-        if (check.getResult().equalsIgnoreCase("game created")) {
-            System.out.println("game created");
-            GroundController.set_lable("game created");
+            if (check.getResult().equalsIgnoreCase("game created")) {
+                System.out.println("game created");
+                GroundController.set_lable("game created");
+            }
+        }catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
         }
 
     }
 
-    public static void check_status() {
-        System.out.println("MESSAGE COD : "  + check.getCode());
+    public static void check_status(Log log) {
+//        System.out.println("MESSAGE COD : "  + check.getCode());
 
         if (check.getCode() == 0) {
+            log.setCode(check.getCode());
+            log.setMessage(check.getMessage()[0]);
             System.out.println(check.getMessage()[0]);
             GroundController.set_lable(check.getMessage()[0]);
         }
         if (check.getCode() == 1) {
+            log.setCode(check.getCode());
+            log.setMessage(check.getMessage()[0]);
+            log.setRival(check.getRival());
             System.out.println(check.getMessage()[0]);
             GroundController.set_lable(check.getMessage()[0]);
             Gson gson = new Gson();
@@ -39,16 +52,22 @@ public class Analysis {
             Messege.init_game();
         }
         if (check.getCode() == 2) {
+            log.setCode(check.getCode());
+            log.setMessage(check.getMessage()[0]);
             //messege:waiting for your rival board
             System.out.println(check.getMessage()[0]);
             GroundController.set_lable(check.getMessage()[0]);
         }
         if (check.getCode() == 3) {
+            log.setCode(check.getCode());
+            log.setMessage(check.getMessage()[0]);
+            log.setLast_hits(check.getLast_hit());
             GroundController.can_move=true; // THIS CODE CAN MOVE ! NOT IN DOC!
             System.out.println(check.getMessage()[0]);
             GroundController.set_lable(check.getMessage()[0]);
             Analysis.fix_last_hit();
             if (check.real_last_hit == null  || check.real_last_hit.length == 0) {
+                log.setLast_hits("enemy didnt hit");
                 return;
             } else {
                 check_enemy_movment(check.real_last_hit);
@@ -58,17 +77,26 @@ public class Analysis {
         }
 
         if (check.getCode() == 4) {
+            log.setCode(check.getCode());
+            log.setMessage(check.getMessage()[0]);
             GroundController.can_move=false;
             //messege:waiting for your rival move
             System.out.println(check.getMessage()[0]);
             GroundController.set_lable(check.getMessage()[0]);
         }
         if (check.getCode() == 5) {
+            log.setCode(check.getCode());
+            log.setMessage(check.getMessage()[0]);
+            log.setWinner(check.getWinner());
+            GroundController.set_lable("winner : "+check.getWinner()+"game finished");
             //messege : game is finished
             //winner playerx
-            GroundController.set_lable("Game is finished");
+//            GroundController.set_lable("Game is finished");
+            Messege.quite_game();
         }
         if (check.getCode() == 6) {
+            log.setCode(check.getCode());
+            log.setMessage(check.getMessage()[0]);
             //messege : cancelld by user
             GroundController.set_lable("Game is Canceled");
         }
@@ -128,6 +156,9 @@ public class Analysis {
     public static void check_hit_offline(int x , int y){
         //computer
         if (Offline.nobat%2==1){
+            if (check_computer_move[x][y]==1){Offline.nobat=1;return;}
+            check_computer_move[x][y]=1;
+
 
             if (GroundController.ground1.board_array[x][y]==1){
                 Offline.k_computer++;

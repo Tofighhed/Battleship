@@ -25,12 +25,6 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-
-//        int[][] map = new int[10][10] ;
-//
-//        Gson gson = new Gson();
-//        System.out.println(gson.toJson(map).toString());
-//
         launch(args);
     }
 

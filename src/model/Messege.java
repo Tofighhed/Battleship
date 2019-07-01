@@ -7,8 +7,10 @@ import retrofit2.Response;
 import Controller.GroundController;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Messege {
+    public static ArrayList<Messege> messegeArrayList=new ArrayList<>();
 
 
     public String getResult() {
@@ -174,7 +176,9 @@ public class Messege {
         } catch (java.net.UnknownHostException e) {
             System.out.println(e.getMessage() + "\nCannot Connect to Network");
         } catch (IOException N) {
-            N.printStackTrace();
+            System.out.println(N.getMessage());
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
         return null;
     }

@@ -18,6 +18,7 @@ public class MainMenueController  implements Initializable {
 
 
     public void Play2(ActionEvent actionEvent) {
+
         GroundController.isOnline=false;
         if (Main.main == null ){
             System.out.println("NO MAIN GAME!");

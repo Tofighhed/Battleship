@@ -8,7 +8,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Offline {
-
     public static int nobat = 0;
     public static int k_self = 0;
     public static int k_computer = 0;
@@ -44,7 +43,7 @@ public class Offline {
                     play_computer();
 
                 }else {
-
+                    GroundController.set_lable("you should move");
                 }
             });
         }

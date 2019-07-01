@@ -1,5 +1,6 @@
 package Controller;
 
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -228,8 +229,16 @@ public class GroundController implements Initializable {
 
     @FXML
     public void leave_game(javafx.event.ActionEvent event) {
-        Messege.quite_game();
-
+      if (isOnline) {
+            Messege.quite_game();
+            Gson gson = new Gson();
+            String m = gson.toJson(Log.getLog_inf());
+            System.out.println(m);
+            System.exit(0);
+        }
+        else {
+            System.exit(0);
+      }
     }
 
 }

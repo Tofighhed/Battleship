@@ -9,19 +9,18 @@ public class Pos {
     public String side;
 
     public Pos(String pos) {
-        x = Integer.parseInt( pos.charAt(1) + "");
-        y = Integer.parseInt( pos.charAt(2) + "");
-        combine = x*10 + y ;
+        x = Integer.parseInt(pos.charAt(1) + "");
+        y = Integer.parseInt(pos.charAt(2) + "");
+        combine = x * 10 + y;
         side = pos.charAt(0) + "";
     }
-    public Pos(String pos ,int gm_id){
-        x = Integer.parseInt( pos.charAt(1) + "");
-        y = Integer.parseInt( pos.charAt(2) + "");
-        combine = x*10 + y ;
+
+    public Pos(String pos, int gm_id) {
+        x = Integer.parseInt(pos.charAt(1) + "");
+        y = Integer.parseInt(pos.charAt(2) + "");
+        combine = x * 10 + y;
         side = pos.charAt(0) + "";
         game_id = gm_id;
     }
-//    public static int[][] str_to_arr(String str){
-//        int first
-//    }
 }
+
