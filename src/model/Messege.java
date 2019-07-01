@@ -3,10 +3,9 @@ package model;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.annotations.SerializedName;
-import network.Retrofit_Server;
 import retrofit2.Response;
 import sample.Cga;
-import sample.GroundController;
+import Controller.GroundController;
 
 import java.io.IOException;
 
@@ -167,8 +166,7 @@ public class Messege {
                 return gson.fromJson(error, Messege.class);
             } else {
                 Game.game_id = m.body().getGame_id();
-//                Cga.game_id=Game.game_id;
-//            Analysis.check.game_id=m.body().getGame_id();
+
                 GroundController.ground1.game_id = Game.game_id;
                 return m.body();
             }
@@ -306,7 +304,7 @@ public class Messege {
 
     return null;
     }
-
+    }
 
 //        Retrofit_Server retrofit_server = new Retrofit_Server();
 //        retrofit_server.getTService().get_category().enqueue(new Callback<Middle>() {
@@ -332,70 +330,3 @@ public class Messege {
 //                System.out.println("EXCEPTION : " + throwable.getMessage());
 //            }
 //        });
-
-
-//    public void check_start_game() {
-//    "result": "game created",
-//        check=Messege.start_game();
-//        this=Messege.start_game();
-//        if (this.getDetail(0).equalsIgnoreCase("You have an unfinished game.")){
-//            System.out.println(this.getDetail(0));
-//            return;
-//        }
-//        if (this.getStatus().equalsIgnoreCase("ok")) {
-//            System.out.println("game created");
-//        }
-//        if (this.getCode() == 400) {
-//            System.out.println(this.getDetail(0));
-//        }
-//    }
-//
-//    public void check_status() {
-//        Messege check = this;
-//        if (check.getCode() == 1) {
-//            //rival find
-//            //send your board
-//        }
-//        if (check.getCode() == 2) {
-//            //messege:waiting for your rival board
-//        }
-//        if (check.getCode() == 3) {
-//            //messege : its your hit
-//            //last hit:[n,m]
-//        }
-//
-//        if (check.getCode() == 4) {
-//            //messege:waiting for your rival move
-//        }
-//        if (check.getCode() == 5) {
-//            //messege : game is finished
-//            //winner playerx
-//        }
-//        if (check.getCode() == 6) {
-//            //messege : cancelld by user
-//        }
-//    }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

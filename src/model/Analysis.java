@@ -1,7 +1,7 @@
 package model;
 
 import com.google.gson.Gson;
-import sample.GroundController;
+import Controller.GroundController;
 
 public class Analysis {
 
@@ -116,6 +116,39 @@ public class Analysis {
         return;
     }
 
+    public static void check_hit_offline(int x , int y){
+        //computer
+        if (Offline.nobat%0==1){
 
+            if (GroundController.ground1.board_array[x][y]==1){
+                Offline.k_computer++;
+                Offline.nobat=1;
+                GroundController.a.get(x*10+y).setStyle("-fx-background-color:#ff1145 ");
+            }if (GroundController.ground1.board_array[x][y]==0){
+                Offline.nobat=0;
+                GroundController.a.get(x*10+y).setStyle("-fx-background-color:#19B5FE ");
+            }
+
+        }
+        //player
+        else {
+            if (Offline.nobat%0==0){
+                if (GroundController.ground2.board_array[x][y]==1){
+                    Offline.k_self++;
+                    Offline.nobat=0;
+                    GroundController.b.get(x*10+y).setStyle("-fx-background-color:#ff1145 ");
+                }
+                if (GroundController.ground2.board_array[x][y]==0){
+                    Offline.nobat=1;
+                    GroundController.b.get(x*10+y).setStyle("-fx-background-color:#19B5FE ");
+                }
+            }
+
+
+        }
+
+
+
+    }
 }
 

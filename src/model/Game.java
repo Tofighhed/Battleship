@@ -1,11 +1,9 @@
 package model;
 
 import com.google.gson.Gson;
-import network.Retrofit_Server;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import sample.GroundController;
 
 import java.util.Timer;
 import java.util.TimerTask;

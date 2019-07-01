@@ -1,5 +1,6 @@
 package sample;
 
+import Controller.GroundController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +17,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         this.primaryStage = primaryStage; // store corent stage [ current Active window]
-        Parent root = FXMLLoader.load(getClass().getResource("MainMenue.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../View/MainMenue.fxml"));
         primaryStage.setScene(new Scene(root, 300, 300));
         primaryStage.show();
         main = this; // set for access
@@ -38,7 +39,7 @@ public class Main extends Application {
         if (primaryStage == null){
             primaryStage = new Stage(); // redundant
         }
-        Parent root = FXMLLoader.load(getClass().getResource("Ground.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../View/Ground.fxml"));
         primaryStage.setScene(new Scene(root, 900, 400));
         primaryStage.show();
     }
