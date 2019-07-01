@@ -21,6 +21,7 @@ public class Game {
 
         @Override
         public void run() {
+
             System.out.println("TIMER RUN : " + count);
             Retrofit_Server retrofit_server = new Retrofit_Server();
 

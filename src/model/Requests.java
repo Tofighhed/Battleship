@@ -1,12 +1,7 @@
 package model;
 
-import model.Ground;
-import model.Message2;
-import model.Messege;
-import model.Pos;
 import retrofit2.Call;
 import retrofit2.http.*;
-import sample.Cga;
 
 public interface Requests {
     static final String TOKEN = "34c12e4f0142d6047ce6d519036260ff23fdea4c"; // TOFIGH AD

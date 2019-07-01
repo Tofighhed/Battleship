@@ -1,4 +1,4 @@
-package sample;
+package model;
 
 import Controller.GroundController;
 import javafx.application.Application;

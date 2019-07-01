@@ -2,7 +2,7 @@ package Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import sample.Main;
+import model.Main;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,6 +18,7 @@ public class MainMenueController  implements Initializable {
 
 
     public void Play2(ActionEvent actionEvent) {
+        GroundController.isOnline=false;
         if (Main.main == null ){
             System.out.println("NO MAIN GAME!");
             return;
@@ -30,6 +31,7 @@ public class MainMenueController  implements Initializable {
     }
 
     public void Online_mod(ActionEvent actionEvent) {
+        GroundController.isOnline=true;
         if (Main.main == null ){
             System.out.println("NO MAIN GAME!");
             return;

@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import model.*;
-import sample.Buttonmain;
+import model.Buttonmain;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,10 +19,10 @@ public class GroundController implements Initializable {
     public static ArrayList<Button> buttonlist = new ArrayList<>();
     public static ArrayList<Buttonmain> a = new ArrayList<>();
     public static ArrayList<Buttonmain> b = new ArrayList<>();
-
+    public static boolean start_game=false;
     public static boolean make_board = false;
     public static Ground ground1 = new Ground();
-    public static Ground ground2= new Ground();
+    public static Ground ground2 = new Ground();
     public static Pos my_pos;
     public static boolean can_move = false;
     public VBox vba1;
@@ -91,6 +91,7 @@ public class GroundController implements Initializable {
                 Buttonmain button = new Buttonmain();
                 button.setPrefWidth(30);
                 button.setPrefHeight(30);
+//                button.setDisable(true);
                 button.setId(pre_ida + i + "" + j);
                 button.setOnAction(eventEventHandler);
                 getvBoxea()[i].getChildren().add(button);
@@ -100,6 +101,7 @@ public class GroundController implements Initializable {
                 Buttonmain button2 = new Buttonmain();
                 button2.setPrefWidth(30);
                 button2.setPrefHeight(30);
+//                button.setDisable(true);
                 button2.setId(pre_idb + i + "" + j);
                 button2.setOnAction(eventEventHandler);
                 getvBoxeb()[i].getChildren().add(button2);
@@ -119,19 +121,30 @@ public class GroundController implements Initializable {
     EventHandler<javafx.event.ActionEvent> eventEventHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
-            if (!can_move) {
-                return;
+            if (isOnline) {
+                if (!can_move) {
+                    return;
+                }
             }
-            String btn_id = ((Button) event.getSource()).getId();
-            System.out.println(btn_id);
+            else {
+                if (!make_board)return;
+                if (!start_game)return;
+                String btn_id = ((Button) event.getSource()).getId();
+                System.out.println(btn_id);
 
-            if (btn_id.startsWith("b")) { // our map
+                if (btn_id.startsWith("b")) { // our map
 
-                my_pos = new Pos(btn_id, Game.game_id); // server wants valid game id
+                    my_pos = new Pos(btn_id); // server wants valid game id
+                    if (isOnline) {
+                        Analysis.check_my_movment();
+                    } else {
+                        if (Offline.nobat % 2 == 0)
+                            Analysis.check_hit_offline(my_pos.x, my_pos.y);
+                    }
 
-                Analysis.check_my_movment();
+                } else {// self map
 
-            } else {// self map
+                }
 
             }
 
@@ -155,8 +168,14 @@ public class GroundController implements Initializable {
             System.out.println("create board first");
             return;
         } else {
-            Analysis.check_start_game();
-            Game.timer();
+            if (isOnline) {
+                Analysis.check_start_game();
+                Game.timer();
+            }
+            else {
+                start_game=true;
+                Offline.timee();
+            }
         }
     }
 
@@ -168,13 +187,16 @@ public class GroundController implements Initializable {
         }
 
         ground1.make_ground();
-        ground2.make_ground();
+        if (!isOnline) {
+            ground2.make_ground();
+        }
         make_board = true;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 int val = ground1.board_array[i][j];
                 if (val == 1)
                     a.get(i * 10 + j).setStyle("-fx-background-color:#00ff00");
+                    a.get(i * 10 + j).setDisable(true);
 
             }
         }
