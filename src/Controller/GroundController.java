@@ -15,6 +15,20 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GroundController implements Initializable {
+    public static GroundController current_instance ;
+
+    public static void set_lable(String s){ // static for fast value set
+        if (current_instance != null)
+            current_instance.set_lable_value(s);
+    }
+
+    private void set_lable_value (String s){ // non static for this controller
+        if (label != null){
+            label.setText(s);
+        }
+    }
+
+
     public static boolean isOnline = true; // online game with server false : 2 player offline
     public static ArrayList<Button> buttonlist = new ArrayList<>();
     public static ArrayList<Buttonmain> a = new ArrayList<>();
@@ -80,6 +94,8 @@ public class GroundController implements Initializable {
     Button c_board = new Button();
     @FXML
     Button l_game = new Button();
+    @FXML
+    private Label label = new Label();
 
 
     public void set_vbox() {
@@ -115,6 +131,7 @@ public class GroundController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("INITIALIZED >>>>>>>>>>>>>>>>>>");
         set_vbox();
+        current_instance = this; // SETTING THIS CONTROLLER ACCESSIBLE
     }
 
 
@@ -152,14 +169,14 @@ public class GroundController implements Initializable {
         }
     };
 
-    @FXML
-    Label label = laabel;
+//    @FXML
+//    Label label = laabel;
 
-    public static Label laabel = new Label();
+//    public static Label laabel = new Label();
 
-    public static void Set_label_(String str) {
-        laabel.setText(str);
-    }
+//    public static void Set_label_(String str) {
+//        laabel.setText(str);
+//    }
 
     @FXML
     public void setStart(javafx.event.ActionEvent event) {

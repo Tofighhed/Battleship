@@ -47,7 +47,7 @@
       <Button fx:id="c_board" onAction="#create_board" style="-fx-background-color: #19B5FE;" text="Create board" />
 
       <Button fx:id="l_game" onAction="#leave_game" style="-fx-background-color: e74c3c;" text="Leave game" />
-      <Label fx:id="label" prefHeight="27.0" prefWidth="151.0" text="سنلسلت" />
+      <Label fx:id="label" prefHeight="27.0" prefWidth="151.0" text="NO PAIN NO GAME" />
 
    </VBox>
 <!--<Button fx:id="make_ground" prefHeight="300"prefWidth="50"/>-->

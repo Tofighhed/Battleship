@@ -11,12 +11,14 @@ public class Analysis {
         check = Messege.start_game();
         if (check.getCode() == 400) {
             System.out.println(check.getDetail(0) + "1:");
+            GroundController.set_lable(check.getDetail(0));
             return;
         }
         System.out.println(check.getGame_id());
 //    GroundController.ground1.game_id=check.getGame_id();
         if (check.getResult().equalsIgnoreCase("game created")) {
             System.out.println("game created");
+            GroundController.set_lable("game created");
         }
 
     }
@@ -26,9 +28,11 @@ public class Analysis {
 
         if (check.getCode() == 0) {
             System.out.println(check.getMessage()[0]);
+            GroundController.set_lable(check.getMessage()[0]);
         }
         if (check.getCode() == 1) {
             System.out.println(check.getMessage()[0]);
+            GroundController.set_lable(check.getMessage()[0]);
             Gson gson = new Gson();
             System.out.println(gson.toJson(GroundController.ground1));
 
@@ -37,10 +41,12 @@ public class Analysis {
         if (check.getCode() == 2) {
             //messege:waiting for your rival board
             System.out.println(check.getMessage()[0]);
+            GroundController.set_lable(check.getMessage()[0]);
         }
         if (check.getCode() == 3) {
             GroundController.can_move=true; // THIS CODE CAN MOVE ! NOT IN DOC!
             System.out.println(check.getMessage()[0]);
+            GroundController.set_lable(check.getMessage()[0]);
             Analysis.fix_last_hit();
             if (check.real_last_hit == null  || check.real_last_hit.length == 0) {
                 return;
@@ -55,13 +61,16 @@ public class Analysis {
             GroundController.can_move=false;
             //messege:waiting for your rival move
             System.out.println(check.getMessage()[0]);
+            GroundController.set_lable(check.getMessage()[0]);
         }
         if (check.getCode() == 5) {
             //messege : game is finished
             //winner playerx
+            GroundController.set_lable("Game is finished");
         }
         if (check.getCode() == 6) {
             //messege : cancelld by user
+            GroundController.set_lable("Game is Canceled");
         }
     }
 
